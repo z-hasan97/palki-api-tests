@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: 759bb0b3-006f-40e5-8a1c-84ba31e6b700
+
+localResources:
+  collections:
+    - ../Palki-API.postman_collection.json
