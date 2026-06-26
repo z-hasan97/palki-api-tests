@@ -1,95 +1,303 @@
 {
-  "info": { "name": "Palki Platform API - Complete", "description": "All 50+ endpoints across 8 microservices", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
-  "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
-  "variable": [
-    { "key": "baseUrl", "value": "http://localhost:3001/api/v1" },
-    { "key": "token", "value": "" }, { "key": "userId", "value": "" }, { "key": "paymentId", "value": "" },
-    { "key": "agentId", "value": "" }, { "key": "matchId", "value": "" }, { "key": "postSlug", "value": "" }
-  ],
-  "item": [
-    {
-      "name": "1. Auth", "item": [
-        { "name": "Register", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.userId)pm.collectionVariables.set('userId',d.userId)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"newuser@test.com\",\"password\":\"Test1234\",\"name\":\"Test User\"}" }, "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth","register"] } } },
-        { "name": "Send OTP", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"user@test.com\",\"purpose\":\"REGISTRATION\"}" }, "url": { "raw": "{{baseUrl}}/auth/send-otp", "host": ["{{baseUrl}}"], "path": ["auth","send-otp"] } } },
-        { "name": "Verify OTP", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"userId\":\"{{userId}}\",\"recipient\":\"user@test.com\",\"code\":\"PASTE_OTP\"}" }, "url": { "raw": "{{baseUrl}}/auth/verify-otp", "host": ["{{baseUrl}}"], "path": ["auth","verify-otp"] } } },
-        { "name": "Login", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.accessToken)pm.collectionVariables.set('token',d.accessToken);if(d.user)pm.collectionVariables.set('userId',d.user.id)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"identifier\":\"zahid.updated@example.com\",\"password\":\"Test1234\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth","login"] } } },
-        { "name": "Refresh Token", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"refreshToken\":\"PASTE_TOKEN\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/refresh", "host": ["{{baseUrl}}"], "path": ["auth","refresh"] } } },
-        { "name": "Logout", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"refreshToken\":\"PASTE_TOKEN\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth","logout"] } } },
-        { "name": "Get Me", "request": { "auth": { "type": "bearer", "bearer": [{"key":"token","value":"{{token}}","type":"string"}] }, "method": "GET", "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth","me"] } } },
-        { "name": "Forgot Password", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"user@test.com\"}" }, "url": { "raw": "{{baseUrl}}/auth/forgot-password", "host": ["{{baseUrl}}"], "path": ["auth","forgot-password"] } } },
-        { "name": "Reset Password", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"token\":\"reset_token\",\"newPassword\":\"NewPass123\"}" }, "url": { "raw": "{{baseUrl}}/auth/reset-password", "host": ["{{baseUrl}}"], "path": ["auth","reset-password"] } } },
-        { "name": "Resend Verification", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"user@test.com\"}" }, "url": { "raw": "{{baseUrl}}/auth/resend-verification", "host": ["{{baseUrl}}"], "path": ["auth","resend-verification"] } } },
-        { "name": "Change Password", "request": { "auth": { "type": "bearer", "bearer": [{"key":"token","value":"{{token}}","type":"string"}] }, "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"currentPassword\":\"Test1234\",\"newPassword\":\"NewPass123\"}" }, "url": { "raw": "{{baseUrl}}/auth/change-password", "host": ["{{baseUrl}}"], "path": ["auth","change-password"] } } }
-      ]
-    },
-    {
-      "name": "2. User", "item": [
-        { "name": "Get Profile", "request": { "auth": { "type": "bearer", "bearer": [{"key":"token","value":"{{token}}","type":"string"}] }, "method": "GET", "url": { "raw": "{{baseUrl}}/users/profile", "host": ["{{baseUrl}}"], "path": ["users","profile"] } } },
-        { "name": "Update Profile", "request": { "auth": { "type": "bearer", "bearer": [{"key":"token","value":"{{token}}","type":"string"}] }, "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"name\":\"Updated Name\",\"phone\":\"+8801700000000\"}" }, "url": { "raw": "{{baseUrl}}/users/profile", "host": ["{{baseUrl}}"], "path": ["users","profile"] } } }
-      ]
-    },
-    {
-      "name": "3. Clients", "item": [
-        { "name": "List Clients", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/clients", "host": ["{{baseUrl}}"], "path": ["clients"] } } },
-        { "name": "Create Client", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"userId\":\"{{userId}}\",\"packageId\":\"f3555008-f5c1-4240-95e3-6dcf18d8f113\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/clients", "host": ["{{baseUrl}}"], "path": ["clients"] } } },
-        { "name": "Get Client", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/clients/dec7c157-df51-49ac-8beb-4ca7812fa387", "host": ["{{baseUrl}}"], "path": ["clients","dec7c157-df51-49ac-8beb-4ca7812fa387"] } } },
-        { "name": "Update Client", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"status\":\"ACTIVE\"}" }, "url": { "raw": "{{baseUrl}}/clients/dec7c157-df51-49ac-8beb-4ca7812fa387", "host": ["{{baseUrl}}"], "path": ["clients","dec7c157-df51-49ac-8beb-4ca7812fa387"] } } },
-        { "name": "Delete Client", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/clients/PASTE_ID", "host": ["{{baseUrl}}"], "path": ["clients","PASTE_ID"] } } }
-      ]
-    },
-    {
-      "name": "4. Agents", "item": [
-        { "name": "List Agents", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/agents", "host": ["{{baseUrl}}"], "path": ["agents"] } } },
-        { "name": "Create Agent", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.id)pm.collectionVariables.set('agentId',d.id)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"name\":\"Agent Smith\",\"email\":\"agent@test.com\",\"userId\":\"{{userId}}\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/agents", "host": ["{{baseUrl}}"], "path": ["agents"] } } },
-        { "name": "Get Agent", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/agents/{{agentId}}", "host": ["{{baseUrl}}"], "path": ["agents","{{agentId}}"] } } },
-        { "name": "Update Agent", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"name\":\"Agent Updated\"}" }, "url": { "raw": "{{baseUrl}}/agents/{{agentId}}", "host": ["{{baseUrl}}"], "path": ["agents","{{agentId}}"] } } },
-        { "name": "Delete Agent", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/agents/{{agentId}}", "host": ["{{baseUrl}}"], "path": ["agents","{{agentId}}"] } } }
-      ]
-    },
-    {
-      "name": "5. Packages & Payments", "item": [
-        { "name": "List Packages", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/packages", "host": ["{{baseUrl}}"], "path": ["packages"] } } },
-        { "name": "Initiate Payment", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.paymentId)pm.collectionVariables.set('paymentId',d.paymentId)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"userId\":\"{{userId}}\",\"packageId\":\"f3555008-f5c1-4240-95e3-6dcf18d8f113\",\"amount\":999}" }, "url": { "raw": "{{baseUrl}}/payments/initiate", "host": ["{{baseUrl}}"], "path": ["payments","initiate"] } } },
-        { "name": "Verify Payment", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"paymentId\":\"{{paymentId}}\",\"transactionId\":\"txn_test\"}" }, "url": { "raw": "{{baseUrl}}/payments/verify", "host": ["{{baseUrl}}"], "path": ["payments","verify"] } } },
-        { "name": "Payment History", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/payments", "host": ["{{baseUrl}}"], "path": ["payments"] } } }
-      ]
-    },
-    {
-      "name": "6. Matches", "item": [
-        { "name": "List Matches", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/matches", "host": ["{{baseUrl}}"], "path": ["matches"] } } },
-        { "name": "Request Match", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.id)pm.collectionVariables.set('matchId',d.id)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"requesterId\":\"{{userId}}\",\"targetId\":\"14b5a018-239a-4e16-bb1f-3ff13ff790c9\",\"action\":\"request\"}" }, "url": { "raw": "{{baseUrl}}/matches/request", "host": ["{{baseUrl}}"], "path": ["matches","request"] } } },
-        { "name": "Approve Match", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"id\":\"{{matchId}}\",\"action\":\"approve\"}" }, "url": { "raw": "{{baseUrl}}/matches/approve", "host": ["{{baseUrl}}"], "path": ["matches","approve"] } } },
-        { "name": "Reject Match", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"id\":\"{{matchId}}\",\"action\":\"reject\"}" }, "url": { "raw": "{{baseUrl}}/matches/reject", "host": ["{{baseUrl}}"], "path": ["matches","reject"] } } }
-      ]
-    },
-    {
-      "name": "7. Notifications", "item": [
-        { "name": "Send Notification", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"recipient\":\"user@test.com\",\"message\":\"Hello!\",\"channel\":\"email\",\"action\":\"send\"}" }, "url": { "raw": "{{baseUrl}}/notifications/send", "host": ["{{baseUrl}}"], "path": ["notifications","send"] } } },
-        { "name": "Notification Logs", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/notifications/logs", "host": ["{{baseUrl}}"], "path": ["notifications","logs"] } } }
-      ]
-    },
-    {
-      "name": "8. Blog", "item": [
-        { "name": "Public Posts", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/blog/posts", "host": ["{{baseUrl}}"], "path": ["blog","posts"] } } },
-        { "name": "Post by Slug", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.slug)pm.collectionVariables.set('postSlug',d.slug)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/blog/posts/hello-world", "host": ["{{baseUrl}}"], "path": ["blog","posts","hello-world"] } } },
-        { "name": "Blog Categories", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/blog/categories", "host": ["{{baseUrl}}"], "path": ["blog","categories"] } } },
-        { "name": "Add Comment", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"postId\":\"c63489ad-f340-4784-9106-9ffc7a36a70f\",\"userId\":\"{{userId}}\",\"authorName\":\"User\",\"content\":\"Great post!\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/blog/comments", "host": ["{{baseUrl}}"], "path": ["blog","comments"] } } },
-        { "name": "Create Post (Admin)", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"title\":\"New Blog Post\",\"content\":\"Content here\",\"status\":\"PUBLISHED\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/admin/blog/posts", "host": ["{{baseUrl}}"], "path": ["admin","blog","posts"] } } },
-        { "name": "Create Category (Admin)", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"name\":\"Technology\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/admin/blog/categories", "host": ["{{baseUrl}}"], "path": ["admin","blog","categories"] } } }
-      ]
-    },
-    {
-      "name": "9. Admin", "item": [
-        { "name": "Dashboard", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["admin","dashboard"] } } },
-        { "name": "Users", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/admin/users", "host": ["{{baseUrl}}"], "path": ["admin","users"] } } },
-        { "name": "Reports", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/admin/reports", "host": ["{{baseUrl}}"], "path": ["admin","reports"] } } }
-      ]
-    },
-    {
-      "name": "10. Health", "item": [
-        { "name": "Gateway Health", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] } } },
-        { "name": "All Services", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/health/services", "host": ["{{baseUrl}}"], "path": ["health","services"] } } }
-      ]
-    }
-  ]
+    "info":  {
+                 "name":  "Palki Platform API - Complete v0.0.3",
+                 "description":  "50+ endpoints across 8 microservices with RBAC",
+                 "version":  "0.0.3",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "auth":  {
+                 "type":  "bearer",
+                 "bearer":  [
+                                {
+                                    "key":  "token",
+                                    "value":  "{{token}}",
+                                    "type":  "string"
+                                }
+                            ]
+             },
+    "variable":  [
+                     {
+                         "key":  "baseUrl",
+                         "value":  "http://localhost:3001/api/v1"
+                     },
+                     {
+                         "key":  "token",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "adminToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "userId",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "paymentId",
+                         "value":  ""
+                     }
+                 ],
+    "item":  [
+                 {
+                     "name":  "0. Health",
+                     "item":  [
+                                  {
+                                      "name":  "All Services",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/health",
+                                                                  "path":  "health"
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "1. Auth",
+                     "item":  [
+                                  {
+                                      "name":  "Register",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/auth/register",
+                                                                  "path":  [
+                                                                               "auth",
+                                                                               "register"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Login (User)",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/auth/login",
+                                                                  "path":  [
+                                                                               "auth",
+                                                                               "login"
+                                                                           ]
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Login (Admin)",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/auth/login",
+                                                                  "path":  [
+                                                                               "auth",
+                                                                               "login"
+                                                                           ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "2. User",
+                     "item":  [
+                                  {
+                                      "name":  "Get Profile",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/users/profile",
+                                                                  "path":  [
+                                                                               "users",
+                                                                               "profile"
+                                                                           ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "3. Clients",
+                     "item":  [
+                                  {
+                                      "name":  "List Clients",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/clients",
+                                                                  "path":  "clients"
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "4. Agents",
+                     "item":  [
+                                  {
+                                      "name":  "List Agents",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/agents",
+                                                                  "path":  "agents"
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "5. Payments",
+                     "item":  [
+                                  {
+                                      "name":  "Packages",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/packages",
+                                                                  "path":  "packages"
+                                                              }
+                                                  }
+                                  },
+                                  {
+                                      "name":  "Initiate",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/payments/initiate",
+                                                                  "path":  [
+                                                                               "payments",
+                                                                               "initiate"
+                                                                           ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "6. Matches",
+                     "item":  [
+                                  {
+                                      "name":  "List Matches",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/matches",
+                                                                  "path":  "matches"
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "7. Blog",
+                     "item":  [
+                                  {
+                                      "name":  "Public Posts",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/blog/posts",
+                                                                  "path":  [
+                                                                               "blog",
+                                                                               "posts"
+                                                                           ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "8. Admin",
+                     "item":  [
+                                  {
+                                      "name":  "Dashboard",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/admin/dashboard",
+                                                                  "path":  [
+                                                                               "admin",
+                                                                               "dashboard"
+                                                                           ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "9. Notifications",
+                     "item":  [
+                                  {
+                                      "name":  "Send",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/notifications/send",
+                                                                  "path":  [
+                                                                               "notifications",
+                                                                               "send"
+                                                                           ]
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 },
+                 {
+                     "name":  "10. Health",
+                     "item":  [
+                                  {
+                                      "name":  "Gateway",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "url":  {
+                                                                  "host":  [
+                                                                               "{{baseUrl}}"
+                                                                           ],
+                                                                  "raw":  "{{baseUrl}}/health",
+                                                                  "path":  "health"
+                                                              }
+                                                  }
+                                  }
+                              ]
+                 }
+             ]
 }

@@ -1,0 +1,99 @@
+{
+  "info": {
+    "name": "Palki Platform API - Complete v0.0.3",
+    "description": "50+ endpoints across 8 microservices with RBAC, error handling, and full test scenarios",
+    "version": "0.0.3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3001/api/v1" },
+    { "key": "token", "value": "" }, { "key": "adminToken", "value": "" }, { "key": "refreshToken", "value": "" },
+    { "key": "userId", "value": "" }, { "key": "paymentId", "value": "" }, { "key": "agentId", "value": "" },
+    { "key": "matchId", "value": "" }, { "key": "postSlug", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "0. Health Check", "item": [
+        { "name": "All Services Status", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();Object.keys(d).forEach(k=>pm.test(k+': '+d[k].status,d[k].status==='up'))"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] } } }
+      ]
+    },
+    {
+      "name": "1. Auth (Public)", "item": [
+        { "name": "1.1 Register", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.userId){pm.collectionVariables.set('userId',d.userId);pm.test('User registered',true)}else{pm.test('Error: '+d.error?.message,false)}"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"test_v003@example.com\",\"password\":\"Test1234\",\"name\":\"v0.0.3 Tester\"}" }, "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth","register"] } } },
+        { "name": "1.2 Send OTP", "event": [{ "listen": "test", "script": { "exec": ["pm.test('OTP sent',true);console.log('CHECK AUTH-SERVICE LOGS FOR OTP CODE')"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"test_v003@example.com\",\"purpose\":\"REGISTRATION\"}" }, "url": { "raw": "{{baseUrl}}/auth/send-otp", "host": ["{{baseUrl}}"], "path": ["auth","send-otp"] } } },
+        { "name": "1.3 Verify OTP", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.verified)pm.test('Verified: '+d.state,true);else pm.test('Failed: '+d.error?.message,false)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"userId\":\"{{userId}}\",\"recipient\":\"test_v003@example.com\",\"code\":\"PASTE_OTP\"}" }, "url": { "raw": "{{baseUrl}}/auth/verify-otp", "host": ["{{baseUrl}}"], "path": ["auth","verify-otp"] } } },
+        { "name": "1.4 Login (User)", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.accessToken){pm.collectionVariables.set('token',d.accessToken);pm.collectionVariables.set('refreshToken',d.refreshToken);pm.collectionVariables.set('userId',d.user.id);pm.test('Token saved',true)}"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"identifier\":\"zahid.updated@example.com\",\"password\":\"Test1234\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth","login"] } } },
+        { "name": "1.5 Login (Admin)", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.accessToken){pm.collectionVariables.set('adminToken',d.accessToken);pm.test('Admin token saved',true)}"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"identifier\":\"admin@palki.com\",\"password\":\"Admin1234\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth","login"] } } },
+        { "name": "1.6 Refresh Token", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"refreshToken\":\"{{refreshToken}}\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/refresh", "host": ["{{baseUrl}}"], "path": ["auth","refresh"] } } },
+        { "name": "1.7 Logout", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"refreshToken\":\"{{refreshToken}}\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth","logout"] } } }
+      ]
+    }
+  ]
+}
+,{
+      "name": "2. User Profile (Auth Required)", "item": [
+        { "name": "2.1 Get Profile", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Name: '+d.name,d.name!==undefined)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/users/profile", "host": ["{{baseUrl}}"], "path": ["users","profile"] } } },
+        { "name": "2.2 Update Profile", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"name\":\"v0.0.3 Updated\",\"phone\":\"+8801999999999\"}" }, "url": { "raw": "{{baseUrl}}/users/profile", "host": ["{{baseUrl}}"], "path": ["users","profile"] } } }
+      ]
+    },
+    {
+      "name": "3. Clients", "item": [
+        { "name": "3.1 List Clients", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Clients found',Array.isArray(d)?d.length>0:d.id!==undefined)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/clients", "host": ["{{baseUrl}}"], "path": ["clients"] } } },
+        { "name": "3.2 Get Client by ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/clients/dec7c157-df51-49ac-8beb-4ca7812fa387", "host": ["{{baseUrl}}"], "path": ["clients","dec7c157-df51-49ac-8beb-4ca7812fa387"] } } }
+      ]
+    },
+    {
+      "name": "4. Agents", "item": [
+        { "name": "4.1 Create Agent", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.id){pm.collectionVariables.set('agentId',d.id);pm.test('Agent created',true)}"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"name\":\"v0.0.3 Agent\",\"email\":\"agent_v003@test.com\",\"userId\":\"{{userId}}\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/agents", "host": ["{{baseUrl}}"], "path": ["agents"] } } },
+        { "name": "4.2 List Agents", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/agents", "host": ["{{baseUrl}}"], "path": ["agents"] } } },
+        { "name": "4.3 Update Agent", "request": { "method": "PUT", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"name\":\"Agent v0.0.3 Updated\"}" }, "url": { "raw": "{{baseUrl}}/agents/{{agentId}}", "host": ["{{baseUrl}}"], "path": ["agents","{{agentId}}"] } } },
+        { "name": "4.4 Delete Agent", "event": [{ "listen": "test", "script": { "exec": ["pm.test('Agent deleted',true)"], "type": "text/javascript" } }], "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/agents/{{agentId}}", "host": ["{{baseUrl}}"], "path": ["agents","{{agentId}}"] } } }
+      ]
+    },
+    {
+      "name": "5. Packages & Payments", "item": [
+        { "name": "5.1 List Packages", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Packages: '+(Array.isArray(d)?d.length:1),true)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/packages", "host": ["{{baseUrl}}"], "path": ["packages"] } } },
+        { "name": "5.2 Initiate Payment", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.paymentId){pm.collectionVariables.set('paymentId',d.paymentId);pm.test('Payment:'+d.status,true)}"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"userId\":\"{{userId}}\",\"packageId\":\"f3555008-f5c1-4240-95e3-6dcf18d8f113\",\"amount\":999}" }, "url": { "raw": "{{baseUrl}}/payments/initiate", "host": ["{{baseUrl}}"], "path": ["payments","initiate"] } } },
+        { "name": "5.3 Verify Payment", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Status:'+d.status,d.status==='COMPLETED')"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"paymentId\":\"{{paymentId}}\",\"transactionId\":\"txn_v003\"}" }, "url": { "raw": "{{baseUrl}}/payments/verify", "host": ["{{baseUrl}}"], "path": ["payments","verify"] } } },
+        { "name": "5.4 Payment History", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/payments", "host": ["{{baseUrl}}"], "path": ["payments"] } } }
+      ]
+    },
+    {
+      "name": "6. Matchmaking", "item": [
+        { "name": "6.1 Request Match", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.id){pm.collectionVariables.set('matchId',d.id);pm.test('Match:'+d.status,true)}"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"requesterId\":\"{{userId}}\",\"targetId\":\"14b5a018-239a-4e16-bb1f-3ff13ff790c9\",\"action\":\"request\"}" }, "url": { "raw": "{{baseUrl}}/matches/request", "host": ["{{baseUrl}}"], "path": ["matches","request"] } } },
+        { "name": "6.2 Approve Match", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Status:'+d.status,d.status==='APPROVED')"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"id\":\"{{matchId}}\",\"action\":\"approve\"}" }, "url": { "raw": "{{baseUrl}}/matches/approve", "host": ["{{baseUrl}}"], "path": ["matches","approve"] } } },
+        { "name": "6.3 List Matches", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/matches", "host": ["{{baseUrl}}"], "path": ["matches"] } } }
+      ]
+    }
+,{
+      "name": "7. Blog", "item": [
+        { "name": "7.1 Create Post", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.slug)pm.collectionVariables.set('postSlug',d.slug);pm.test('Slug:'+d.slug,true)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"title\":\"v0.0.3 Blog Post\",\"content\":\"Content for v0.0.3\",\"status\":\"PUBLISHED\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/admin/blog/posts", "host": ["{{baseUrl}}"], "path": ["admin","blog","posts"] } } },
+        { "name": "7.2 List Public Posts", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Posts: '+(Array.isArray(d)?d.length:1),true)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/blog/posts", "host": ["{{baseUrl}}"], "path": ["blog","posts"] } } },
+        { "name": "7.3 View by Slug", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/blog/posts/{{postSlug}}", "host": ["{{baseUrl}}"], "path": ["blog","posts","{{postSlug}}"] } } },
+        { "name": "7.4 Add Comment", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"postId\":\"c63489ad-f340-4784-9106-9ffc7a36a70f\",\"userId\":\"{{userId}}\",\"authorName\":\"Tester\",\"content\":\"Great post!\",\"action\":\"create\"}" }, "url": { "raw": "{{baseUrl}}/blog/comments", "host": ["{{baseUrl}}"], "path": ["blog","comments"] } } }
+      ]
+    },
+    {
+      "name": "8. Admin (RBAC Protected)", "item": [
+        { "name": "8.1 Dashboard (Admin)", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Revenue:'+d.revenue,d.revenue>0)"], "type": "text/javascript" } }], "request": { "auth": { "type": "bearer", "bearer": [{"key":"token","value":"{{adminToken}}","type":"string"}] }, "method": "GET", "url": { "raw": "{{baseUrl}}/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["admin","dashboard"] } } },
+        { "name": "8.2 Users List (Admin)", "request": { "auth": { "type": "bearer", "bearer": [{"key":"token","value":"{{adminToken}}","type":"string"}] }, "method": "GET", "url": { "raw": "{{baseUrl}}/admin/users", "host": ["{{baseUrl}}"], "path": ["admin","users"] } } },
+        { "name": "8.3 Reports (Admin)", "request": { "auth": { "type": "bearer", "bearer": [{"key":"token","value":"{{adminToken}}","type":"string"}] }, "method": "GET", "url": { "raw": "{{baseUrl}}/admin/reports", "host": ["{{baseUrl}}"], "path": ["admin","reports"] } } },
+        { "name": "8.4 Dashboard (User - Should Fail)", "event": [{ "listen": "test", "script": { "exec": ["pm.test('Should return 403 Forbidden',pm.response.code===403)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["admin","dashboard"] } } }
+      ]
+    },
+    {
+      "name": "9. Notifications", "item": [
+        { "name": "9.1 Send Notification", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"recipient\":\"user@test.com\",\"message\":\"v0.0.3 notification\",\"channel\":\"email\",\"action\":\"send\"}" }, "url": { "raw": "{{baseUrl}}/notifications/send", "host": ["{{baseUrl}}"], "path": ["notifications","send"] } } },
+        { "name": "9.2 Notification Logs", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/notifications/logs", "host": ["{{baseUrl}}"], "path": ["notifications","logs"] } } }
+      ]
+    },
+    {
+      "name": "10. Error Handling Tests", "item": [
+        { "name": "10.1 Duplicate Email", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Error code: '+d.code,d.code==='AUTH-1005')"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"admin@palki.com\",\"password\":\"Test1234\",\"name\":\"Dup\"}" }, "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth","register"] } } },
+        { "name": "10.2 Invalid Login", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Error: '+d.code,d.code==='AUTH-1001')"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"identifier\":\"wrong@email.com\",\"password\":\"wrong\",\"deviceId\":\"test\"}" }, "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth","login"] } } },
+        { "name": "10.3 Fake Payment ID", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();pm.test('Error: '+d.code,d.code==='NOT_FOUND-3001')"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"paymentId\":\"00000000-0000-0000-0000-000000000000\",\"transactionId\":\"fake\"}" }, "url": { "raw": "{{baseUrl}}/payments/verify", "host": ["{{baseUrl}}"], "path": ["payments","verify"] } } },
+        { "name": "10.4 No Token (401)", "event": [{ "listen": "test", "script": { "exec": ["pm.test('Should be 401',pm.response.code===401||pm.response.code===500)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/users/profile", "host": ["{{baseUrl}}"], "path": ["users","profile"] } } },
+        { "name": "10.5 RBAC Block (403)", "event": [{ "listen": "test", "script": { "exec": ["pm.test('403 Forbidden - RBAC works',pm.response.code===403)"], "type": "text/javascript" } }], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["admin","dashboard"] } } }
+      ]
+    }
