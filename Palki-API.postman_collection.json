@@ -1,303 +1,1069 @@
 {
-    "info":  {
-                 "name":  "Palki Platform API - Complete v0.0.3",
-                 "description":  "50+ endpoints across 8 microservices with RBAC",
-                 "version":  "0.0.3",
-                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-             },
-    "auth":  {
-                 "type":  "bearer",
-                 "bearer":  [
-                                {
-                                    "key":  "token",
-                                    "value":  "{{token}}",
-                                    "type":  "string"
-                                }
-                            ]
-             },
-    "variable":  [
-                     {
-                         "key":  "baseUrl",
-                         "value":  "http://localhost:3001/api/v1"
-                     },
-                     {
-                         "key":  "token",
-                         "value":  ""
-                     },
-                     {
-                         "key":  "adminToken",
-                         "value":  ""
-                     },
-                     {
-                         "key":  "userId",
-                         "value":  ""
-                     },
-                     {
-                         "key":  "paymentId",
-                         "value":  ""
-                     }
-                 ],
-    "item":  [
-                 {
-                     "name":  "0. Health",
-                     "item":  [
-                                  {
-                                      "name":  "All Services",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/health",
-                                                                  "path":  "health"
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "1. Auth",
-                     "item":  [
-                                  {
-                                      "name":  "Register",
-                                      "request":  {
-                                                      "method":  "POST",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/auth/register",
-                                                                  "path":  [
-                                                                               "auth",
-                                                                               "register"
-                                                                           ]
-                                                              }
-                                                  }
-                                  },
-                                  {
-                                      "name":  "Login (User)",
-                                      "request":  {
-                                                      "method":  "POST",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/auth/login",
-                                                                  "path":  [
-                                                                               "auth",
-                                                                               "login"
-                                                                           ]
-                                                              }
-                                                  }
-                                  },
-                                  {
-                                      "name":  "Login (Admin)",
-                                      "request":  {
-                                                      "method":  "POST",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/auth/login",
-                                                                  "path":  [
-                                                                               "auth",
-                                                                               "login"
-                                                                           ]
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "2. User",
-                     "item":  [
-                                  {
-                                      "name":  "Get Profile",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/users/profile",
-                                                                  "path":  [
-                                                                               "users",
-                                                                               "profile"
-                                                                           ]
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "3. Clients",
-                     "item":  [
-                                  {
-                                      "name":  "List Clients",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/clients",
-                                                                  "path":  "clients"
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "4. Agents",
-                     "item":  [
-                                  {
-                                      "name":  "List Agents",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/agents",
-                                                                  "path":  "agents"
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "5. Payments",
-                     "item":  [
-                                  {
-                                      "name":  "Packages",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/packages",
-                                                                  "path":  "packages"
-                                                              }
-                                                  }
-                                  },
-                                  {
-                                      "name":  "Initiate",
-                                      "request":  {
-                                                      "method":  "POST",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/payments/initiate",
-                                                                  "path":  [
-                                                                               "payments",
-                                                                               "initiate"
-                                                                           ]
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "6. Matches",
-                     "item":  [
-                                  {
-                                      "name":  "List Matches",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/matches",
-                                                                  "path":  "matches"
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "7. Blog",
-                     "item":  [
-                                  {
-                                      "name":  "Public Posts",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/blog/posts",
-                                                                  "path":  [
-                                                                               "blog",
-                                                                               "posts"
-                                                                           ]
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "8. Admin",
-                     "item":  [
-                                  {
-                                      "name":  "Dashboard",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/admin/dashboard",
-                                                                  "path":  [
-                                                                               "admin",
-                                                                               "dashboard"
-                                                                           ]
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "9. Notifications",
-                     "item":  [
-                                  {
-                                      "name":  "Send",
-                                      "request":  {
-                                                      "method":  "POST",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/notifications/send",
-                                                                  "path":  [
-                                                                               "notifications",
-                                                                               "send"
-                                                                           ]
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 },
-                 {
-                     "name":  "10. Health",
-                     "item":  [
-                                  {
-                                      "name":  "Gateway",
-                                      "request":  {
-                                                      "method":  "GET",
-                                                      "url":  {
-                                                                  "host":  [
-                                                                               "{{baseUrl}}"
-                                                                           ],
-                                                                  "raw":  "{{baseUrl}}/health",
-                                                                  "path":  "health"
-                                                              }
-                                                  }
-                                  }
-                              ]
-                 }
-             ]
+  "info": {
+    "name": "Palki Platform API - Complete v0.0.3",
+    "description": "50+ endpoints, 8 microservices, RBAC, error handling",
+    "version": "0.0.3",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001/api/v1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "paymentId",
+      "value": ""
+    },
+    {
+      "key": "agentId",
+      "value": ""
+    },
+    {
+      "key": "matchId",
+      "value": ""
+    },
+    {
+      "key": "postSlug",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Health",
+      "item": [
+        {
+          "name": "All Services",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. Auth",
+      "item": [
+        {
+          "name": "Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();if(d.userId)pm.collectionVariables.set('userId',d.userId);pm.test('Registered',!!d.userId)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test_v003@example.com\",\n  \"password\": \"Test1234\",\n  \"name\": \"v0.0.3 Tester\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/send-otp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "send-otp"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test_v003@example.com\",\n  \"purpose\": \"REGISTRATION\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/verify-otp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "verify-otp"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"recipient\": \"test_v003@example.com\",\n  \"code\": \"PASTE_OTP\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login (User)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();if(d.accessToken){pm.collectionVariables.set('token',d.accessToken);pm.collectionVariables.set('refreshToken',d.refreshToken);pm.collectionVariables.set('userId',d.user.id)};pm.test('Token saved',!!d.accessToken)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"zahid.updated@example.com\",\n  \"password\": \"Test1234\",\n  \"deviceId\": \"postman\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();if(d.accessToken)pm.collectionVariables.set('adminToken',d.accessToken);pm.test('Admin token saved',!!d.accessToken)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"admin@palki.com\",\n  \"password\": \"Admin1234\",\n  \"deviceId\": \"postman\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\",\n  \"deviceId\": \"postman\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\",\n  \"deviceId\": \"postman\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. User",
+      "item": [
+        {
+          "name": "Get Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();pm.test('User: '+d.name,!!d.name)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"v0.0.3 Updated\",\n  \"phone\": \"+8801999999999\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Clients",
+      "item": [
+        {
+          "name": "List Clients",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/clients",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clients"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Agents",
+      "item": [
+        {
+          "name": "Create Agent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();if(d.id)pm.collectionVariables.set('agentId',d.id);pm.test('Created',!!d.id)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/agents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agents"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"v0.0.3 Agent\",\n  \"email\": \"agent_v003@test.com\",\n  \"userId\": \"{{userId}}\",\n  \"action\": \"create\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List Agents",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/agents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agents"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Agent",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/agents/{{agentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "agents",
+                "{{agentId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Payments",
+      "item": [
+        {
+          "name": "List Packages",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/packages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "packages"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Initiate Payment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();if(d.paymentId)pm.collectionVariables.set('paymentId',d.paymentId);pm.test('Status:'+d.status,d.status==='PENDING')"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/payments/initiate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "initiate"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"packageId\": \"f3555008-f5c1-4240-95e3-6dcf18d8f113\",\n  \"amount\": 999\n}"
+            }
+          }
+        },
+        {
+          "name": "Verify Payment",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/payments/verify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "verify"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentId\": \"{{paymentId}}\",\n  \"transactionId\": \"txn_v003\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Payment History",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/payments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Matches",
+      "item": [
+        {
+          "name": "Request Match",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();if(d.id)pm.collectionVariables.set('matchId',d.id);pm.test('Match:'+d.status,!!d.id)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/matches/request",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "matches",
+                "request"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requesterId\": \"{{userId}}\",\n  \"targetId\": \"14b5a018-239a-4e16-bb1f-3ff13ff790c9\",\n  \"action\": \"request\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Approve Match",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/matches/approve",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "matches",
+                "approve"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"{{matchId}}\",\n  \"action\": \"approve\"\n}"
+            }
+          }
+        },
+        {
+          "name": "List Matches",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/matches",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "matches"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Blog",
+      "item": [
+        {
+          "name": "Create Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var d=pm.response.json();if(d.slug)pm.collectionVariables.set('postSlug',d.slug);pm.test('Slug:'+d.slug,!!d.slug)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/admin/blog/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "blog",
+                "posts"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"v0.0.3 Blog Post\",\n  \"content\": \"Content for v0.0.3\",\n  \"status\": \"PUBLISHED\",\n  \"action\": \"create\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Public Posts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/blog/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "blog",
+                "posts"
+              ]
+            }
+          }
+        },
+        {
+          "name": "View by Slug",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/blog/posts/{{postSlug}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "blog",
+                "posts",
+                "{{postSlug}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Comment",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/blog/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "blog",
+                "comments"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"postId\": \"c63489ad-f340-4784-9106-9ffc7a36a70f\",\n  \"userId\": \"{{userId}}\",\n  \"authorName\": \"Tester\",\n  \"content\": \"Great post!\",\n  \"action\": \"create\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Admin (RBAC)",
+      "item": [
+        {
+          "name": "Dashboard (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Revenue > 0',pm.response.json().revenue>0)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard"
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Users List (Admin)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/admin/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reports (Admin)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/admin/reports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "reports"
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Dashboard (User - 403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('403 Forbidden',pm.response.code===403)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "9. Notifications",
+      "item": [
+        {
+          "name": "Send Notification",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/notifications/send",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "send"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": \"user@test.com\",\n  \"message\": \"v0.0.3 notification\",\n  \"channel\": \"email\",\n  \"action\": \"send\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Logs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/notifications/logs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "logs"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Error Tests",
+      "item": [
+        {
+          "name": "Duplicate Email (AUTH-1005)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('AUTH-1005',pm.response.json().code==='AUTH-1005')"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@palki.com\",\n  \"password\": \"Test1234\",\n  \"name\": \"Dup\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Invalid Login (AUTH-1001)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('AUTH-1001',pm.response.json().code==='AUTH-1001')"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"wrong@email.com\",\n  \"password\": \"wrong\",\n  \"deviceId\": \"test\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Fake Payment (NOT_FOUND-3001)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('NOT_FOUND-3001',pm.response.json().code==='NOT_FOUND-3001')"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/payments/verify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payments",
+                "verify"
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentId\": \"00000000-0000-0000-0000-000000000000\",\n  \"transactionId\": \"fake\"\n}"
+            }
+          }
+        },
+        {
+          "name": "No Token (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('401/500',[401,500].includes(pm.response.code))"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          }
+        },
+        {
+          "name": "RBAC Block (403)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('403',pm.response.code===403)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/admin/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "dashboard"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
 }
