@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/blog/comments"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "postId": "c63489ad-f340-4784-9106-9ffc7a36a70f",
+      "userId": "{{userId}}",
+      "authorName": "Tester",
+      "content": "Great post!",
+      "action": "create"
+    }
+order: 4000

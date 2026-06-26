@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/matches/approve"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "id": "{{matchId}}",
+      "action": "approve"
+    }
+order: 2000

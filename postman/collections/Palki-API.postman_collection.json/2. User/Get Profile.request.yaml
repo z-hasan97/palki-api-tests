@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/users/profile"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "var d=pm.response.json();pm.test('User: '+d.name,!!d.name)"
+    language: text/javascript
+order: 1000

@@ -1,0 +1,19 @@
+$kind: collection
+name: Palki Platform API - Complete v0.0.3
+description: 50+ endpoints, 8 microservices, RBAC, error handling
+variables:
+  baseUrl: http://localhost:3001/api/v1
+  token: ""
+  adminToken: ""
+  refreshToken: ""
+  userId: ""
+  paymentId: ""
+  agentId: ""
+  matchId: ""
+  postSlug: ""
+auth:
+  - id: 58f117ea-ffe1-4617-886e-2519cb4794c6
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"

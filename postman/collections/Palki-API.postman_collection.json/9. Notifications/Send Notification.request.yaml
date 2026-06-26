@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/notifications/send"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "recipient": "user@test.com",
+      "message": "v0.0.3 notification",
+      "channel": "email",
+      "action": "send"
+    }
+order: 1000

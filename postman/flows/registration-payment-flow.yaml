@@ -1,0 +1,56 @@
+name: Full Registration + Payment
+description: Complete user journey from registration to client upgrade
+blocks:
+  - id: start
+    type: start
+  - id: register
+    type: send-request
+    data:
+      collection: Palki Platform API - Complete v0.0.3
+      request: 1.1 Register
+      body:
+        email: flowdemo@example.com
+        password: Test1234
+        name: Flow Demo User
+  - id: login
+    type: send-request
+    data:
+      collection: Palki Platform API - Complete v0.0.3
+      request: 1.4 Login (User)
+      body:
+        identifier: flowdemo@example.com
+        password: Test1234
+        deviceId: flow_demo
+  - id: profile
+    type: send-request
+    data:
+      collection: Palki Platform API - Complete v0.0.3
+      request: 2.1 Get Profile
+  - id: payment
+    type: send-request
+    data:
+      collection: Palki Platform API - Complete v0.0.3
+      request: 5.2 Initiate Payment
+  - id: verify
+    type: send-request
+    data:
+      collection: Palki Platform API - Complete v0.0.3
+      request: 5.3 Verify Payment
+  - id: clients
+    type: send-request
+    data:
+      collection: Palki Platform API - Complete v0.0.3
+      request: 3.1 List Clients
+connections:
+  - from: start
+    to: register
+  - from: register
+    to: login
+  - from: login
+    to: profile
+  - from: profile
+    to: payment
+  - from: payment
+    to: verify
+  - from: verify
+    to: clients

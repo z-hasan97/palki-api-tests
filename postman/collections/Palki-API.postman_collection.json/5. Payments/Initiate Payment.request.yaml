@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/payments/initiate"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "userId": "{{userId}}",
+      "packageId": "f3555008-f5c1-4240-95e3-6dcf18d8f113",
+      "amount": 999
+    }
+scripts:
+  - type: afterResponse
+    code: var d=pm.response.json();if(d.paymentId)pm.collectionVariables.set('paymentId',d.paymentId);pm.test('Status:'+d.status,d.status==='PENDING')
+    language: text/javascript
+order: 2000

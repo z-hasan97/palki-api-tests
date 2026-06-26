@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/users/profile"
+method: GET
+scripts:
+  - type: afterResponse
+    code: pm.test('401/500',[401,500].includes(pm.response.code))
+    language: text/javascript
+order: 4000
