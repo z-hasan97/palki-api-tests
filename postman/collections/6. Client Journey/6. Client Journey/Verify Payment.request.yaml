@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/payments/verify"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"paymentId":"{{paymentId}}","transactionId":"txn_journey"}'
+order: 7000

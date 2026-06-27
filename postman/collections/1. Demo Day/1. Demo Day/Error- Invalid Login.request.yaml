@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Error: Invalid Login"
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"identifier":"fake@x.com","password":"x","deviceId":"x"}'
+order: 8000

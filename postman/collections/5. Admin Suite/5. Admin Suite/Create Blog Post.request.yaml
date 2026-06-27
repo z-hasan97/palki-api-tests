@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/admin/blog/posts"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"title":"Admin Demo Post","content":"Posted from admin suite","status":"PUBLISHED","action":"create"}'
+order: 5000

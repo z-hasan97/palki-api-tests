@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"identifier":"flowtest2@example.com","password":"Test1234","deviceId":"auth_test"}'
+order: 3000

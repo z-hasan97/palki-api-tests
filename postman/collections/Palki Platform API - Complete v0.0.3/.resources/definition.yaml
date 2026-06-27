@@ -1,5 +1,4 @@
 $kind: collection
-name: Palki Platform API - Complete v0.0.3
 description: 50+ endpoints, 8 microservices, RBAC, error handling
 variables:
   baseUrl: http://localhost:3001/api/v1
@@ -12,7 +11,7 @@ variables:
   matchId: ""
   postSlug: ""
 auth:
-  - id: 58f117ea-ffe1-4617-886e-2519cb4794c6
+  - id: ad164779-b9c9-414f-beaa-b78b07b510df
     type: bearer
     name: bearer auth
     credentials:

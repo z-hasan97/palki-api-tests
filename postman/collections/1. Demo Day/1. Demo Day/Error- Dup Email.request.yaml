@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Error: Dup Email"
+url: "{{baseUrl}}/auth/register"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"email":"admin@palki.com","password":"x","name":"x"}'
+order: 7000

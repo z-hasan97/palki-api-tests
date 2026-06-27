@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/payments/initiate"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"userId":"{{userId}}","packageId":"f3555008-f5c1-4240-95e3-6dcf18d8f113","amount":999}'
+order: 6000

@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"identifier":"admin@palki.com","password":"Admin1234","deviceId":"admin_test"}'
+order: 1000
