@@ -6,3 +6,4 @@ localResources:
 cloudResources:
   collections:
     ../postman/collections/Palki-API.postman_collection.json: 19404229-96b82696-af8c-4b9d-9841-b4f47db8066b
+    ../Palki-API.postman_collection.json: 19404229-96b82696-af8c-4b9d-9841-b4f47db8066b

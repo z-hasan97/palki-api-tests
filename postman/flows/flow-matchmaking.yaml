@@ -1,0 +1,23 @@
+name: 5. Matchmaking
+blocks:
+  - id: start
+    type: start
+  - id: request
+    type: send-request
+    data:
+      request: 6. Matches / 6.1 Request Match
+  - id: list
+    type: send-request
+    data:
+      request: 6. Matches / 6.3 List Matches
+  - id: approve
+    type: send-request
+    data:
+      request: 6. Matches / 6.2 Approve Match
+connections:
+  - from: start
+    to: request
+  - from: request
+    to: list
+  - from: list
+    to: approve

@@ -1,0 +1,29 @@
+name: 4. Blog + Comments
+blocks:
+  - id: start
+    type: start
+  - id: create
+    type: send-request
+    data:
+      request: 7. Blog / 7.1 Create Post
+  - id: list
+    type: send-request
+    data:
+      request: 7. Blog / 7.2 Public Posts
+  - id: slug
+    type: send-request
+    data:
+      request: 7. Blog / 7.3 View by Slug
+  - id: comment
+    type: send-request
+    data:
+      request: 7. Blog / 7.4 Add Comment
+connections:
+  - from: start
+    to: create
+  - from: create
+    to: list
+  - from: list
+    to: slug
+  - from: slug
+    to: comment

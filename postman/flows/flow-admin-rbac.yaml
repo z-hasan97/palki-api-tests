@@ -1,0 +1,23 @@
+name: 2. Admin RBAC Test
+blocks:
+  - id: start
+    type: start
+  - id: admin-login
+    type: send-request
+    data:
+      request: 1. Auth / 1.5 Login (Admin)
+  - id: dashboard
+    type: send-request
+    data:
+      request: 8. Admin (RBAC) / 8.1 Dashboard (Admin)
+  - id: user-block
+    type: send-request
+    data:
+      request: 8. Admin (RBAC) / 8.4 Dashboard (User - 403)
+connections:
+  - from: start
+    to: admin-login
+  - from: admin-login
+    to: dashboard
+  - from: dashboard
+    to: user-block

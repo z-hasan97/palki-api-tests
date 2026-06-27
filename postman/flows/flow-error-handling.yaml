@@ -1,0 +1,35 @@
+name: 3. Error Handling
+blocks:
+  - id: start
+    type: start
+  - id: dup
+    type: send-request
+    data:
+      request: 10. Error Tests / 10.1 Duplicate Email
+  - id: invalid
+    type: send-request
+    data:
+      request: 10. Error Tests / 10.2 Invalid Login
+  - id: fake
+    type: send-request
+    data:
+      request: 10. Error Tests / 10.3 Fake Payment
+  - id: notoken
+    type: send-request
+    data:
+      request: 10. Error Tests / 10.4 No Token
+  - id: rbac
+    type: send-request
+    data:
+      request: 10. Error Tests / 10.5 RBAC Block
+connections:
+  - from: start
+    to: dup
+  - from: dup
+    to: invalid
+  - from: invalid
+    to: fake
+  - from: fake
+    to: notoken
+  - from: notoken
+    to: rbac

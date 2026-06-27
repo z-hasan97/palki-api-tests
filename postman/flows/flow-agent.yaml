@@ -1,0 +1,17 @@
+name: 6. Agent CRUD
+blocks:
+  - id: start
+    type: start
+  - id: create
+    type: send-request
+    data:
+      request: 4. Agents / 4.1 Create Agent
+  - id: list
+    type: send-request
+    data:
+      request: 4. Agents / 4.2 List Agents
+connections:
+  - from: start
+    to: create
+  - from: create
+    to: list
