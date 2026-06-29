@@ -1,5 +1,0 @@
-name: Local
-variables:
-  - key: baseUrl
-    value: 'http://localhost:3000'
-    enabled: true
