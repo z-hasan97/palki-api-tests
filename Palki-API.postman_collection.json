@@ -1,6 +1,6 @@
 {
   "info": { 
-    "name": "Palki Platform API - Complete v0.0.4", 
+    "name": "Palki Platform API - Complete v0.0.5", 
     "description": "10 microservices, 60+ endpoints, RBAC, Agent-Client, Media", 
     "version": "0.0.4",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" 
@@ -20,7 +20,7 @@
   ],
   "item": [
     {
-      "name": "0. Health (v0.0.4)",
+      "name": "0. Health (v0.0.5)",
       "item": [
         { "name": "All Services", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] } } }
       ]
@@ -28,7 +28,7 @@
     {
       "name": "1. Auth",
       "item": [
-        { "name": "Register", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"v4test@example.com\",\"password\":\"Test1234\",\"name\":\"v0.0.4 User\"}" }, "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth","register"] } } },
+        { "name": "Register", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"email\":\"v5test@example.com\",\"password\":\"Test1234\",\"name\":\"v0.0.5 User\"}" }, "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth","register"] } } },
         { "name": "Login (Admin)", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.accessToken)pm.collectionVariables.set('adminToken',d.accessToken)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"identifier\":\"admin@palki.com\",\"password\":\"Admin1234\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth","login"] } } },
         { "name": "Login (User)", "event": [{ "listen": "test", "script": { "exec": ["var d=pm.response.json();if(d.accessToken)pm.collectionVariables.set('token',d.accessToken);if(d.user)pm.collectionVariables.set('userId',d.user.id)"], "type": "text/javascript" } }], "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"identifier\":\"flowtest2@example.com\",\"password\":\"Test1234\",\"deviceId\":\"postman\"}" }, "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth","login"] } } }
       ]
@@ -87,8 +87,9 @@
     {
       "name": "10. Notifications",
       "item": [
-        { "name": "Send", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"recipient\":\"demo@test.com\",\"message\":\"v0.0.4 test\",\"channel\":\"email\",\"action\":\"send\"}" }, "url": { "raw": "{{baseUrl}}/notifications/send", "host": ["{{baseUrl}}"], "path": ["notifications","send"] } } }
+        { "name": "Send", "request": { "method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": { "mode": "raw", "raw": "{\"recipient\":\"demo@test.com\",\"message\":\"v0.0.5 test\",\"channel\":\"email\",\"action\":\"send\"}" }, "url": { "raw": "{{baseUrl}}/notifications/send", "host": ["{{baseUrl}}"], "path": ["notifications","send"] } } }
       ]
     }
   ]
 }
+

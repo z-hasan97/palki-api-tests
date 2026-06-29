@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"identifier":"admin@palki.com","password":"Admin1234","deviceId":"postman"}'
+scripts:
+  - type: afterResponse
+    code: |-
+      var data = pm.response.json();
+      if (data.accessToken) {
+        pm.collectionVariables.set('adminToken', data.accessToken);
+        console.log('SAVED: ' + data.accessToken.substring(0,20));
+      } else {
+        console.log('NO TOKEN IN RESPONSE');
+      }
+    language: text/javascript
+order: 1000

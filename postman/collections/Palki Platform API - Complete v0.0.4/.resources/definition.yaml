@@ -12,7 +12,7 @@ variables:
   postSlug: ""
   mediaId: ""
 auth:
-  - id: 61317260-beb9-4443-9881-82b9ec191e55
+  - id: dedd7d7d-a567-4958-bcf3-ef912e1149ae
     type: bearer
     name: bearer auth
     credentials:

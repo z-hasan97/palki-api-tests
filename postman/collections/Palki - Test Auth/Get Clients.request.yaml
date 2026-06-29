@@ -1,8 +1,8 @@
 $kind: http-request
-url: "{{baseUrl}}/admin/reports"
+url: "{{baseUrl}}/clients"
 method: GET
 auth:
   type: bearer
   credentials:
     token: "{{adminToken}}"
-order: 3000
+order: 2000
