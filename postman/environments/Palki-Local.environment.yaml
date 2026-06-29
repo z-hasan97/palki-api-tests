@@ -1,11 +1,11 @@
-name: Palki Local
+﻿name: Palki Local
 values:
   - key: baseUrl
     value: 'http://localhost:3001/api/v1'
   - key: token
     value: ''
   - key: adminToken
-    value: ''
+    value: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMGRiZDQwMS1hMmEzLTQzZWQtOWQ5NS1mM2M1NGRlYWFmNWMiLCJzaWQiOiJlZjg2YWRmYy1iMzE1LTQ4YzEtYjRjMS05MTEyOWYxMzI2ODQiLCJkaWQiOiJwb3N0bWFuIiwicm9sIjpbIkFETUlOIl0sInBybSI6W10sImlhdCI6MTc4MjczNzY1MiwiZXhwIjoxNzgyNzQxMjUyLCJhdWQiOiJwYWxraS1hcGkiLCJpc3MiOiJwYWxraS1hdXRoLXNlcnZpY2UifQ.VT9ylgxURUWiQ6BZxna-jOnQcvKupfF_Lg9E_aGbnCIYXreikFxAwpB4hyPKu22_rBu8mohlosi-ezfEc0OUD4qAa7pwo-cqR-nVc5epx2lhVuNEUuukaxOHcVvtnlf5iBSkrhWBVlCMOPUWcoaRtsvyNmOtp6Dhs-bDOBrsxt0gQ6AmGaddF-cBFIDBbTNalmTVaGB7TlfX_mM1dGK49abHxAPWuEA_JNCxoihkEB4XByIgyYv63TDhqmXr2TOcSygeYTcwH6ukj3U6ycXgdnL3aTT1e4BxqeSmgZMoAWfPHO7f1jInAKuYbSKcdNQxAxQ9xxBaXy8BeMcLDqbG_w'
   - key: refreshToken
     value: ''
   - key: userId

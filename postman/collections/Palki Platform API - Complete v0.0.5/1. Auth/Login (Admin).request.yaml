@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: '{"identifier":"admin@palki.com","password":"Admin1234","deviceId":"postman"}'
+scripts:
+  - type: afterResponse
+    code: var d=pm.response.json();if(d.accessToken)pm.collectionVariables.set('adminToken',d.accessToken)
+    language: text/javascript
+order: 2000

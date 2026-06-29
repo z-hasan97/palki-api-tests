@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/matches"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{adminToken}}"
+order: 1000

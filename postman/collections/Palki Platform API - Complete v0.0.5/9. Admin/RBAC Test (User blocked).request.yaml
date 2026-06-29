@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/admin/dashboard"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+scripts:
+  - type: afterResponse
+    code: pm.test('403 Forbidden', pm.response.code === 403)
+    language: text/javascript
+order: 2000
