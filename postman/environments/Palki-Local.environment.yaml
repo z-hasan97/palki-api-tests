@@ -1,0 +1,42 @@
+name: Palki Local
+values:
+  - key: baseUrl
+    value: http://localhost:3001/api/v1
+    type: default
+    enabled: true
+  - key: token
+    value: ""
+    type: default
+    enabled: true
+  - key: adminToken
+    value: ""
+    type: default
+    enabled: true
+  - key: refreshToken
+    value: ""
+    type: default
+    enabled: true
+  - key: userId
+    value: ""
+    type: default
+    enabled: true
+  - key: paymentId
+    value: ""
+    type: default
+    enabled: true
+  - key: agentId
+    value: ""
+    type: default
+    enabled: true
+  - key: matchId
+    value: ""
+    type: default
+    enabled: true
+  - key: postSlug
+    value: ""
+    type: default
+    enabled: true
+  - key: mediaId
+    value: ""
+    type: default
+    enabled: true

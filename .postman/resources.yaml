@@ -10,10 +10,10 @@ localResources:
 cloudResources:
   collections:
     ../Palki-API.postman_collection.json: 19404229-96b82696-af8c-4b9d-9841-b4f47db8066b
-    ../postman/collections/Palki Platform API - Complete v0.0.3: 19404229-8807826d-fd42-40f0-be33-6bd375dd4b87
     ../postman/collections/1. Demo Day: 130dabf9-d9d2-4d43-aeda-4a803da4db92
     ../postman/collections/2. Full Regression: d6655516-d7f5-49a1-ba29-85a8833ac706
     ../postman/collections/6. Client Journey: a2e28298-7443-45a2-99d8-170ed1eab4e1
     ../postman/collections/4. Payment Flow: 0fa7fd06-7adb-41ff-977e-56e39d9cc6df
     ../postman/collections/3. Auth Only: e79e80ac-e844-4afb-b41f-13aaca40c712
     ../postman/collections/5. Admin Suite: ce17a154-6f91-4d43-bce3-170ba5a454a7
+    ../postman/collections/Palki Platform API - Complete v0.0.3: f70e9942-b769-44a4-b727-a4f6d6366361
