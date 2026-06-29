@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "identifier": "wrong@email.com",
+      "password": "wrong",
+      "deviceId": "test"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('AUTH-1001',pm.response.json().code==='AUTH-1001')
+    language: text/javascript
+order: 2000

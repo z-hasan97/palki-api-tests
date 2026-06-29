@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/media"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{adminToken}}"
+order: 1000

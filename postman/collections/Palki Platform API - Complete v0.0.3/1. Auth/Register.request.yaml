@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/register"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "email": "test_v003@example.com",
+      "password": "Test1234",
+      "name": "v0.0.3 Tester"
+    }
+scripts:
+  - type: afterResponse
+    code: var d=pm.response.json();if(d.userId)pm.collectionVariables.set('userId',d.userId);pm.test('Registered',!!d.userId)
+    language: text/javascript
+order: 1000

@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/users/profile"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "v0.0.3 Updated",
+      "phone": "+8801999999999"
+    }
+order: 2000

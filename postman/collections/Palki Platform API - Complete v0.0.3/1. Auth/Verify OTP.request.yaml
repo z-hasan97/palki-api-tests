@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/verify-otp"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "userId": "{{userId}}",
+      "recipient": "test_v003@example.com",
+      "code": "PASTE_OTP"
+    }
+order: 3000

@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/blog/posts"
+method: GET
+order: 1000

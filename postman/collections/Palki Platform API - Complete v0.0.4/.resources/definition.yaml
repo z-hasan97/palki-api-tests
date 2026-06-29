@@ -1,0 +1,19 @@
+$kind: collection
+description: 10 microservices, 60+ endpoints, RBAC, Agent-Client, Media
+variables:
+  baseUrl: http://localhost:3001/api/v1
+  token: ""
+  adminToken: ""
+  refreshToken: ""
+  userId: ""
+  paymentId: ""
+  agentId: ""
+  matchId: ""
+  postSlug: ""
+  mediaId: ""
+auth:
+  - id: 61317260-beb9-4443-9881-82b9ec191e55
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"

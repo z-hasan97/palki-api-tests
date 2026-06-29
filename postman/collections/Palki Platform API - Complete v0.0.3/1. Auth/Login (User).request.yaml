@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "identifier": "zahid.updated@example.com",
+      "password": "Test1234",
+      "deviceId": "postman"
+    }
+scripts:
+  - type: afterResponse
+    code: var d=pm.response.json();if(d.accessToken){pm.collectionVariables.set('token',d.accessToken);pm.collectionVariables.set('refreshToken',d.refreshToken);pm.collectionVariables.set('userId',d.user.id)};pm.test('Token saved',!!d.accessToken)
+    language: text/javascript
+order: 4000
